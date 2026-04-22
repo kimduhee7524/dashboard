@@ -1,32 +1,22 @@
 import { create } from 'zustand';
 import type { CampaignStatus, Platform } from '@/domain/campaign/types';
+import { getDefaultDateRange } from '@/domain/filters/defaults';
 
 type DateISO = string;
 
 type FilterState = {
-  dateRange: { start: DateISO | null; end: DateISO | null };
+  dateRange: { start: DateISO; end: DateISO };
   statuses: CampaignStatus[];
   platforms: Platform[];
 
-  setDateRange: (range: { start: DateISO | null; end: DateISO | null }) => void;
+  setDateRange: (range: { start: DateISO; end: DateISO }) => void;
   toggleStatus: (status: CampaignStatus) => void;
   togglePlatform: (platform: Platform) => void;
   reset: () => void;
 };
 
-const getInitialDateRange = () => {
-  const now = new Date();
-  const start = new Date(now.getFullYear(), now.getMonth(), 1);
-  const end = new Date(now.getFullYear(), now.getMonth() + 1, 0);
-
-  return {
-    start: start.toISOString().slice(0, 10),
-    end: end.toISOString().slice(0, 10),
-  };
-};
-
 const initialState = {
-  dateRange: getInitialDateRange(),
+  dateRange: getDefaultDateRange(),
   statuses: [] as CampaignStatus[],
   platforms: [] as Platform[],
 };
@@ -50,5 +40,5 @@ export const useFilterStore = create<FilterState>((set) => ({
         : [...state.platforms, platform],
     })),
 
-  reset: () => set({ ...initialState, dateRange: getInitialDateRange() }),
+  reset: () => set({ ...initialState, dateRange: getDefaultDateRange() }),
 }));

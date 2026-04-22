@@ -1,6 +1,6 @@
 import { useFilterStore } from '@/store/filter-store';
 import type { Platform } from '@/domain/campaign/types';
-import { Checkbox } from '@/components/ui/checkbox';
+import { Button } from '@/components/ui/button';
 
 const PLATFORM_OPTIONS: { label: string; value: Platform }[] = [
   { label: 'Google', value: 'Google' },
@@ -14,20 +14,27 @@ export function PlatformFilter() {
 
   return (
     <div className="flex items-center space-x-3">
-      <span className="text-sm font-medium">매체</span>
-      <div className="flex items-center space-x-3">
-        {PLATFORM_OPTIONS.map((option) => (
-          <label
-            key={option.value}
-            className="flex items-center space-x-1 cursor-pointer select-none"
-          >
-            <Checkbox
-              checked={platforms.includes(option.value)}
-              onCheckedChange={() => togglePlatform(option.value)}
-            />
-            <span className="text-sm">{option.label}</span>
-          </label>
-        ))}
+      <span className="text-sm font-medium text-gray-700">매체</span>
+      <div className="flex items-center space-x-2">
+        {PLATFORM_OPTIONS.map((option) => {
+          const isSelected = platforms.includes(option.value);
+          return (
+            <Button
+              key={option.value}
+              type="button"
+              variant={isSelected ? 'default' : 'outline'}
+              size="sm"
+              onClick={() => togglePlatform(option.value)}
+              className={`rounded-full px-4 h-8 border ${
+                isSelected
+                  ? 'bg-blue-600 hover:bg-blue-700 text-white border-blue-600'
+                  : 'bg-white text-gray-600 border-gray-200 hover:bg-gray-50'
+              }`}
+            >
+              {option.label}
+            </Button>
+          );
+        })}
       </div>
     </div>
   );

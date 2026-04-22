@@ -1,25 +1,40 @@
 import type { DailyStat, RawDailyStat } from './types';
 
+function sanitizeDailyStat(raw: RawDailyStat): DailyStat {
+  return {
+    id: raw.id,
+    campaignId: raw.campaignId,
+    date: raw.date,
+    impressions: raw.impressions ?? 0,
+    clicks: raw.clicks ?? 0,
+    conversions: raw.conversions ?? 0,
+    cost: raw.cost ?? 0,
+    conversionsValue: raw.conversionsValue,
+  };
+}
+
+/**
+ * 캠페인+날짜 중복 시, id가 가장 큰 최신 레코드만 유지
+ * id가 증가형 식별자라는 가정하에 동작합니다.
+ */
+function isNewerDailyStat(candidate: DailyStat, existing: DailyStat): boolean {
+  return (
+    candidate.id.localeCompare(existing.id, undefined, { numeric: true }) > 0
+  );
+}
+
 export function normalizeDailyStats(rawStats: RawDailyStat[]): DailyStat[] {
-  const uniqueMap = new Map<string, DailyStat>();
+  const map = new Map<string, DailyStat>();
 
-  rawStats.forEach((stat) => {
+  for (const raw of rawStats) {
+    const stat = sanitizeDailyStat(raw);
     const key = `${stat.campaignId}_${stat.date}`;
+    const existing = map.get(key);
 
-    // 중복 제거: (campaignId, date) 기준으로 첫 번째 항목만 유지
-    if (!uniqueMap.has(key)) {
-      uniqueMap.set(key, {
-        id: stat.id,
-        campaignId: stat.campaignId,
-        date: stat.date,
-        impressions: stat.impressions ?? 0,
-        clicks: stat.clicks ?? 0,
-        conversions: stat.conversions ?? 0,
-        cost: stat.cost ?? 0,
-        conversionsValue: stat.conversionsValue,
-      });
+    if (!existing || isNewerDailyStat(stat, existing)) {
+      map.set(key, stat);
     }
-  });
+  }
 
-  return Array.from(uniqueMap.values());
+  return Array.from(map.values());
 }

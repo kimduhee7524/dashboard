@@ -10,3 +10,13 @@ export interface RawCampaign {
   startDate: string | null;
   endDate: string | null;
 }
+
+export interface Campaign {
+  id: string;
+  name: string;
+  platform: Platform;
+  status: CampaignStatus;
+  budget: number;
+  startDate: string;
+  endDate: string | null;
+}

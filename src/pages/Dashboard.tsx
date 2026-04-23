@@ -3,16 +3,20 @@ import { ErrorBoundary } from '@/components/common/ErrorBoundary';
 import { LoadingSkeleton } from '@/components/common/LoadingSkeleton';
 import { TrendChartWidget } from '@/components/trend-chart/TrendChartWidget';
 import { FilterBar } from '@/components/filter/FilterBar';
+import { CampaignTable } from '@/components/campaign-table/CampaignTable';
 
 export default function Dashboard() {
   return (
     <div className="flex h-screen w-full bg-gray-200 overflow-hidden py-4 px-6 gap-x-4">
-      <main className="flex-1 flex flex-col overflow-hidden bg-transparent gap-4">
+      <main className="flex-1 flex flex-col overflow-y-auto bg-transparent gap-4 pb-10">
         <FilterBar />
         <ErrorBoundary>
           <Suspense fallback={<LoadingSkeleton />}>
-            <div className="h-[400px] w-full">
+            <div className="h-[300px] w-full shrink-0">
               <TrendChartWidget />
+            </div>
+            <div className="w-full shrink-0">
+              <CampaignTable />
             </div>
           </Suspense>
         </ErrorBoundary>

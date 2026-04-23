@@ -24,7 +24,9 @@ export function DateRangeFilter() {
           className="border border-gray-200 rounded-md px-3 py-1.5 text-sm bg-white hover:bg-gray-50 focus:ring-2 focus:ring-blue-100 outline-none transition-colors"
           value={dateEnd}
           min={dateStart || undefined}
-          onChange={(e) => setDateRange({ start: dateStart, end: e.target.value })}
+          onChange={(e) =>
+            setDateRange({ start: dateStart, end: e.target.value })
+          }
         />
       </div>
     </div>

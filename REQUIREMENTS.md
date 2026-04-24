@@ -41,7 +41,7 @@ interface DailyStat {
 - status: `"stopped"`, `"running"` 등 비표준 표기 혼재
 - budget: 문자열(`"2000000원"`)이거나 null인 경우 존재
 - startDate: 구분자가 `/`인 경우 존재 (`2026/01/15`)
-- daily_stats: 동일 `(campaignId, date)` 중복 행 존재 (동일 키 기준 `id`가 가장 큰 레코드만 사용. 전환 데이터의 사후 보정 특성상 최신 레코드가 가장 정확한 값으로 간주)
+- daily_stats: 동일 `(campaignId, date)` 중복 행 존재
 - 수치 필드(impressions, clicks, cost 등): null인 경우 존재
 - conversionsValue: null 허용 (Domain 타입에서도 null 유지)
 
@@ -195,6 +195,7 @@ campaignStart <= filterEnd AND (campaignEnd >= filterStart OR campaignEnd === nu
 | GET    | `/campaigns`            | 캠페인 전체 조회    |
 | GET    | `/daily_stats`          | 일별 성과 전체 조회 |
 | POST   | `/campaigns`            | 캠페인 등록         |
+| PATCH  | `/campaigns/bulk/status`| 캠페인 다중 상태 변경|
 | PATCH  | `/campaigns/:id/status` | 캠페인 상태 변경    |
 
 ### 제약 사항

@@ -1,20 +1,17 @@
 import { flexRender } from '@tanstack/react-table';
-import type { Table } from '@tanstack/react-table';
-import type { CampaignTableRow } from '@/hooks/useTableData';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 import { cn, getTextAlignClass, getFlexJustifyClass } from '@/lib/utils';
+import { useDataTable } from './DataTableContext';
 
-interface TableHeadProps {
-  table: Table<CampaignTableRow>;
-}
+export function DataTableHead() {
+  const table = useDataTable();
 
-export function TableHead({ table }: TableHeadProps) {
   return (
     <thead className="bg-gray-50 sticky top-0 z-10 shadow-sm">
       {table.getHeaderGroups().map((headerGroup) => (
         <tr key={headerGroup.id}>
           {headerGroup.headers.map((header) => {
-            const meta = header.column.columnDef.meta;
+            const meta = header.column.columnDef.meta as Record<string, any> | undefined;
             const alignClass = getTextAlignClass(meta?.align);
             const justifyClass = getFlexJustifyClass(meta?.align);
 

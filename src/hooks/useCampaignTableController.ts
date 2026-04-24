@@ -64,7 +64,7 @@ export function useCampaignTableController() {
 
   return {
     table,
-    globalFilter,
+    searchQuery: globalFilter,
     setGlobalFilter,
     handleBulkUpdateStatus,
   };

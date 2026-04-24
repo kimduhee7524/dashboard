@@ -1,27 +1,30 @@
 import { flexRender } from '@tanstack/react-table';
-import type { Table } from '@tanstack/react-table';
-import type { CampaignTableRow } from '@/hooks/useTableData';
-import { columns } from './columns';
 import { cn, getTextAlignClass } from '@/lib/utils';
+import { useDataTable } from './DataTableContext';
 
-interface TableBodyProps {
-  table: Table<CampaignTableRow>;
+interface DataTableBodyProps {
+  emptyMessage?: string;
 }
 
-export function TableBody({ table }: TableBodyProps) {
+export function DataTableBody({
+  emptyMessage = '데이터가 없습니다.',
+}: DataTableBodyProps) {
+  const table = useDataTable();
+  const rows = table.getRowModel().rows;
+
   return (
     <tbody className="bg-white divide-y divide-gray-200">
-      {table.getRowModel().rows.length === 0 ? (
+      {rows.length === 0 ? (
         <tr>
           <td
-            colSpan={columns.length}
+            colSpan={table.getVisibleLeafColumns().length}
             className="px-6 py-10 text-center text-gray-500 text-sm"
           >
-            데이터가 없습니다.
+            {emptyMessage}
           </td>
         </tr>
       ) : (
-        table.getRowModel().rows.map((row) => {
+        rows.map((row) => {
           return (
             <tr
               key={row.id}
@@ -31,7 +34,9 @@ export function TableBody({ table }: TableBodyProps) {
               )}
             >
               {row.getVisibleCells().map((cell) => {
-                const meta = cell.column.columnDef.meta;
+                const meta = cell.column.columnDef.meta as
+                  | Record<string, any>
+                  | undefined;
                 const alignClass = getTextAlignClass(meta?.align);
 
                 return (

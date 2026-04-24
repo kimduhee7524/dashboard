@@ -4,12 +4,11 @@ import { sortRankings } from '@/lib/math';
 
 export type Top3MetricKey = 'roas' | 'ctr' | 'cpc';
 
-export interface Top3DataResult {
-  top3: CampaignTableRow[];
-  maxMetricValue: number;
+export interface Top3Campaign extends CampaignTableRow {
+  widthPercent: number;
 }
 
-export function useTop3Data(metric: Top3MetricKey): Top3DataResult {
+export function useTop3Data(metric: Top3MetricKey): Top3Campaign[] {
   const { rows } = useTableData();
 
   return useMemo(() => {
@@ -26,9 +25,17 @@ export function useTop3Data(metric: Top3MetricKey): Top3DataResult {
       }
     }
 
-    return {
-      top3,
-      maxMetricValue,
-    };
+    const top3WithPercent = top3.map((item) => {
+      const val = item[metric];
+      const widthPercent =
+        maxMetricValue === 0 ? 0 : Math.min((val / maxMetricValue) * 100, 100);
+
+      return {
+        ...item,
+        widthPercent,
+      };
+    });
+
+    return top3WithPercent;
   }, [rows, metric]);
 }

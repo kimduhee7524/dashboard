@@ -1,6 +1,6 @@
 import { flexRender } from '@tanstack/react-table';
 import type { Table } from '@tanstack/react-table';
-import type { CampaignTableRow } from '@/hooks/derived/useTableData';
+import type { CampaignTableRow } from '@/hooks/useTableData';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 import { cn, getTextAlignClass, getFlexJustifyClass } from '@/lib/utils';
 

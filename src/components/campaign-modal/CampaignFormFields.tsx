@@ -1,8 +1,8 @@
 import { useFormContext } from 'react-hook-form';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { FormField } from '../form/FormField';
-import { NumberInputField } from '../form/NumberInputField';
+import { FormField } from '../common/form/FormField';
+import { NumberInputField } from '../common/form/NumberInputField';
 import type { CampaignFormInput } from '@/schemas/campaign-form';
 
 const PLATFORMS = ['Google', 'Meta', 'Naver'] as const;

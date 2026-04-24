@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useTrendData } from '@/hooks/derived/useTrendData';
+import { useTrendData } from '@/hooks/useTrendData';
 import { TrendChartHeader } from './TrendChartHeader';
 import { TrendMetricToggle } from './TrendMetricToggle';
 import { TrendChart } from './TrendChart';

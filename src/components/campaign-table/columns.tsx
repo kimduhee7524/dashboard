@@ -1,5 +1,5 @@
 import { createColumnHelper } from '@tanstack/react-table';
-import type { CampaignTableRow } from '@/hooks/derived/useTableData';
+import type { CampaignTableRow } from '@/hooks/useTableData';
 import { StatusBadge } from './StatusBadge';
 import { formatCurrency, formatPercent } from '@/lib/format';
 

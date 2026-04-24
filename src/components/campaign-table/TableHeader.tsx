@@ -3,7 +3,7 @@ import { BulkStatusSelect } from './BulkStatusSelect';
 import { CreateCampaignModal } from '@/components/campaign-modal/CreateCampaignModal';
 import type { CampaignStatus } from '@/domain/campaign/types';
 import type { Table } from '@tanstack/react-table';
-import type { CampaignTableRow } from '@/hooks/derived/useTableData';
+import type { CampaignTableRow } from '@/hooks/useTableData';
 
 interface TableHeaderProps {
   table: Table<CampaignTableRow>;

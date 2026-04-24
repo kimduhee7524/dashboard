@@ -23,6 +23,22 @@ export function aggregateByDate(stats: DailyStat[]): TrendData[] {
     }
   }
 
-  // 날짜 기준 오름차순 정렬
   return Array.from(map.values()).sort((a, b) => a.date.localeCompare(b.date));
+}
+
+export function aggregateByCampaign(
+  stats: DailyStat[]
+): Map<string, DailyStat[]> {
+  const map = new Map<string, DailyStat[]>();
+
+  for (const stat of stats) {
+    const existing = map.get(stat.campaignId);
+    if (existing) {
+      existing.push(stat);
+    } else {
+      map.set(stat.campaignId, [stat]);
+    }
+  }
+
+  return map;
 }

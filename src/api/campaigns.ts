@@ -26,3 +26,10 @@ export const updateCampaignStatusBulk = async (
   });
   return data;
 };
+
+export const createCampaign = async (
+  campaign: Partial<RawCampaign>
+): Promise<RawCampaign> => {
+  const { data } = await api.post<RawCampaign>('/campaigns', campaign);
+  return data;
+};

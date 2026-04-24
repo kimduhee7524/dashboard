@@ -11,6 +11,20 @@ export const handlers = [
     return HttpResponse.json(campaigns);
   }),
 
+  http.post('/campaigns', async ({ request }) => {
+    const body = (await request.json()) as any;
+
+    const newCampaign = {
+      ...body,
+      id: `CAM-${Date.now().toString().slice(-5)}`,
+      status: 'active',
+    };
+
+    campaigns.push(newCampaign);
+
+    return HttpResponse.json(newCampaign, { status: 201 });
+  }),
+
   http.patch('/campaigns/bulk/status', async ({ request }) => {
     const body = (await request.json()) as { ids: string[]; status: string };
 

@@ -1,7 +1,6 @@
 import { TableSearch } from './TableSearch';
-import { Plus } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 import { BulkStatusSelect } from './BulkStatusSelect';
+import { CreateCampaignModal } from '@/components/campaign-modal/CreateCampaignModal';
 import type { CampaignStatus } from '@/domain/campaign/types';
 import type { Table } from '@tanstack/react-table';
 import type { CampaignTableRow } from '@/hooks/derived/useTableData';
@@ -28,14 +27,7 @@ export function TableHeader({
     <div className="flex flex-col relative px-6 py-5 bg-white rounded-t-lg gap-4">
       <div className="flex items-center justify-between">
         <h2 className="text-lg font-bold text-gray-900">캠페인 목록</h2>
-        <Button
-          variant="outline"
-          size="sm"
-          className="h-9 px-4 bg-blue-50 text-blue-600 border-none hover:bg-blue-100 font-medium absolute right-6 top-5"
-        >
-          <Plus className="w-4 h-4 mr-1" />
-          캠페인 등록
-        </Button>
+        <CreateCampaignModal />
       </div>
 
       <div className="flex items-center justify-between mt-2">

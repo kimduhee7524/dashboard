@@ -1,26 +1,20 @@
 import { cn } from '@/lib/utils';
-import type { Top3MetricKey } from '@/hooks/useTop3Data';
-import type { CampaignTableRow } from '@/hooks/useTableData';
+import type { Top3MetricKey, Top3Campaign } from '@/hooks/useTop3Data';
 import { formatTop3MetricValue } from '@/lib/format';
 
 interface Top3RankingItemProps {
-  campaign: CampaignTableRow;
+  campaign: Top3Campaign;
   index: number;
   metric: Top3MetricKey;
-  maxMetricValue: number;
 }
 
 export function Top3RankingItem({
   campaign,
   index,
   metric,
-  maxMetricValue,
 }: Top3RankingItemProps) {
   const val = campaign[metric];
-
-  // Progress Bar 비율 계산
-  const widthPercent =
-    maxMetricValue === 0 ? 0 : Math.min((val / maxMetricValue) * 100, 100);
+  const widthPercent = campaign.widthPercent;
 
   return (
     <div className="relative flex items-center gap-4">

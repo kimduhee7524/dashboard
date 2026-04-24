@@ -1,12 +1,9 @@
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import type { Table } from '@tanstack/react-table';
-import type { CampaignTableRow } from '@/hooks/useTableData';
+import { useDataTable } from './DataTableContext';
 
-interface PaginationProps {
-  table: Table<CampaignTableRow>;
-}
-
-export function Pagination({ table }: PaginationProps) {
+export function DataTablePagination() {
+  const table = useDataTable();
+  
   const currentPage = table.getState().pagination.pageIndex + 1;
   const totalPages = table.getPageCount();
   const totalItems = table.getPrePaginationRowModel().rows.length;
@@ -40,10 +37,15 @@ export function Pagination({ table }: PaginationProps) {
     return pages;
   };
 
-  if (totalItems === 0) return null;
+  if (totalItems === 0) {
+    return (
+      <div className="flex items-center justify-between px-4 py-3 sm:px-6 h-[68px]">
+      </div>
+    );
+  }
 
   return (
-    <div className="flex items-center justify-between px-4 py-3 bg-white border-t border-gray-200 sm:px-6">
+    <div className="flex items-center justify-between px-4 py-3 sm:px-6 h-[68px]">
       <div className="flex flex-1 justify-between sm:hidden">
         <button
           onClick={() => table.previousPage()}

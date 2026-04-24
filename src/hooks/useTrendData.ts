@@ -6,6 +6,13 @@ export function useTrendData() {
   const { filteredDailyStats } = useFilteredData();
 
   return useMemo(() => {
-    return aggregateByDate(filteredDailyStats);
+    const data = aggregateByDate(filteredDailyStats);
+    const dateRange =
+      data.length > 0 ? `${data[0].date} ~ ${data[data.length - 1].date}` : '';
+
+    return {
+      data,
+      dateRange,
+    };
   }, [filteredDailyStats]);
 }

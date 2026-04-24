@@ -19,3 +19,5 @@ export interface DailyStat {
   cost: number;
   conversionsValue: number | null;
 }
+
+export type MetricKey = 'cost' | 'impressions' | 'clicks' | 'conversions';

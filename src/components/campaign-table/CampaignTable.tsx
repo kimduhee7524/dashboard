@@ -2,7 +2,7 @@ import { TableHeader } from './TableHeader';
 import { TableHead } from './TableHead';
 import { TableBody } from './TableBody';
 import { Pagination } from './Pagination';
-import { useCampaignTableController } from '@/hooks/campaign/useCampaignTableController';
+import { useCampaignTableController } from '@/hooks/useCampaignTableController';
 
 export function CampaignTable() {
   const { table, globalFilter, setGlobalFilter, handleBulkUpdateStatus } =

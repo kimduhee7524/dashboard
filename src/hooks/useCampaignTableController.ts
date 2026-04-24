@@ -7,7 +7,7 @@ import {
   getSortedRowModel,
 } from '@tanstack/react-table';
 import type { SortingState } from '@tanstack/react-table';
-import { useTableData } from '@/hooks/derived/useTableData';
+import { useTableData } from '@/hooks/useTableData';
 import { useUpdateCampaignStatus } from '@/hooks/queries/useUpdateCampaignStatus';
 import { columns } from '@/components/campaign-table/columns';
 import type { CampaignStatus } from '@/domain/campaign/types';

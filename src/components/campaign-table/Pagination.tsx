@@ -1,6 +1,6 @@
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import type { Table } from '@tanstack/react-table';
-import type { CampaignTableRow } from '@/hooks/derived/useTableData';
+import type { CampaignTableRow } from '@/hooks/useTableData';
 
 interface PaginationProps {
   table: Table<CampaignTableRow>;

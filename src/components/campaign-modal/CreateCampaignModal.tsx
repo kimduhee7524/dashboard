@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Plus } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { FormDialog, useModal } from '@/components/modal';
+import { FormDialog, useModal } from '@/components/common/modal';
 import { CampaignFormFields } from './CampaignFormFields';
 import {
   campaignFormSchema,

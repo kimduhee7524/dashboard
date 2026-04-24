@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { PlatformPieChart } from './PlatformPieChart';
 import { usePlatformData } from '@/hooks/usePlatformData';
 import type { MetricKey } from '@/domain/daily-stats/types';
@@ -20,6 +20,11 @@ export function PlatformDonut() {
   const togglePlatform = useFilterStore((s) => s.togglePlatform);
   const selectedPlatforms = useFilterStore((s) => s.platforms);
   const selectedPlatformsSet = new Set(selectedPlatforms);
+
+  const selectedPlatformsText =
+    selectedPlatforms.length > 0
+      ? selectedPlatforms.join(', ')
+      : '전체 (필터 없음)';
 
   return (
     <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 flex flex-col h-full min-h-[350px]">
@@ -76,10 +81,7 @@ export function PlatformDonut() {
           </div>
 
           <div className="mt-4 px-4 text-[13px] text-gray-500">
-            선택:{' '}
-            {selectedPlatforms.length > 0
-              ? selectedPlatforms.join(', ')
-              : '전체 (필터 없음)'}
+            선택: {selectedPlatformsText}
           </div>
         </div>
       </div>

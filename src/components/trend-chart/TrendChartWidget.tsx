@@ -5,14 +5,9 @@ import { TrendMetricToggle } from './TrendMetricToggle';
 import { TrendChart } from './TrendChart';
 
 export function TrendChartWidget() {
-  const trendData = useTrendData();
+  const { data: trendData, dateRange } = useTrendData();
   const [showImpressions, setShowImpressions] = useState(true);
   const [showClicks, setShowClicks] = useState(true);
-
-  const dateRange =
-    trendData.length > 0
-      ? `${trendData[0].date} ~ ${trendData[trendData.length - 1].date}`
-      : '';
 
   return (
     <div className="flex flex-col h-full w-full p-6 gap-6 bg-white rounded-xl shadow-sm border border-gray-200">

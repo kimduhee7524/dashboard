@@ -5,7 +5,7 @@ import { Top3RankingItem } from './Top3RankingItem';
 
 export function Top3Ranking() {
   const [metric, setMetric] = useState<Top3MetricKey>('roas');
-  const { top3, maxMetricValue } = useTop3Data(metric);
+  const top3 = useTop3Data(metric);
 
   return (
     <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 flex flex-col h-full min-h-[350px]">
@@ -33,7 +33,6 @@ export function Top3Ranking() {
               campaign={campaign}
               index={index}
               metric={metric}
-              maxMetricValue={maxMetricValue}
             />
           ))}
         </div>
